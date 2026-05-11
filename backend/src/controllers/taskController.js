@@ -114,3 +114,15 @@ await logActivity(
   `${req.user.name} a créé la tâche "${title}"`,
   task._id
 );
+const { status, priority, assignedTo, search } = req.query;
+
+if (status) filter.status = status;
+if (priority) filter.priority = priority;
+if (assignedTo) filter.assignedTo = assignedTo;
+
+if (search) {
+  filter.$or = [
+    { title: { $regex: search, $options: 'i' } },
+    { description: { $regex: search, $options: 'i' } }
+  ];
+}
