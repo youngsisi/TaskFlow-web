@@ -107,3 +107,10 @@ if (assignedTo) {
     task: task._id
   });
 }
+await logActivity(
+  'création_tâche',
+  projectId,
+  req.user.userId,
+  `${req.user.name} a créé la tâche "${title}"`,
+  task._id
+);
