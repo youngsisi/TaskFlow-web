@@ -86,3 +86,15 @@ exports.deleteTask = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+exports.getMyTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find({
+      assignedTo: req.user.userId
+    });
+
+    res.json(tasks);
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
