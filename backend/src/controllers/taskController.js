@@ -76,3 +76,13 @@ exports.updateTaskStatus = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+exports.deleteTask = async (req, res) => {
+  try {
+    await Task.findByIdAndDelete(req.params.id);
+
+    res.json({ message: 'Tâche supprimée' });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
