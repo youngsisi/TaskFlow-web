@@ -44,3 +44,19 @@ exports.getTasksByProject = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+exports.updateTask = async (req, res) => {
+  try {
+    const { title, description, priority, status, deadline, assignedTo } = req.body;
+
+    const task = await Task.findByIdAndUpdate(
+      req.params.id,
+      { title, description, priority, status, deadline, assignedTo },
+      { new: true }
+    );
+
+    res.json(task);
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
