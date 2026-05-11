@@ -98,3 +98,12 @@ exports.getMyTasks = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+if (assignedTo) {
+  await Notification.create({
+    user: assignedTo,
+    type: 'assignation',
+    message: `Vous avez été assigné à la tâche "${title}"`,
+    project: projectId,
+    task: task._id
+  });
+}
