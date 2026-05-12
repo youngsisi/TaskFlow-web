@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détail du projet - TaskFlow</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <div class="nav-links">
+            <a href="dashboard.html">Tableau de bord</a>
+            <a href="projects.html">Mes projets</a>
+        </div>
+        <div class="nav-right">
+            <span id="user-name"></span>
+            <button onclick="logout()" class="btn btn-small btn-danger">Déconnexion</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="project-header">
+            <h1 id="project-title">Chargement...</h1>
+            <div class="project-actions" id="owner-actions" style="display:none;">
+                <button class="btn btn-secondary" onclick="showEditProjectModal()">Modifier</button>
+                <button class="btn btn-danger" onclick="deleteProject()">Supprimer</button>
+            </div>
+        </div>
+
+        <div class="project-tabs">
+            <button class="tab-btn active" onclick="showTab('tasks')">Tâches</button>
+            <button class="tab-btn" onclick="showTab('members')">Membres</button>
+            <button class="tab-btn" onclick="showTab('activities')">Activités</button>
+        </div>
+
+        
+        <div id="tab-tasks" class="tab-content active">
+            <div class="filters-bar">
+                <input type="text" id="task-search" placeholder="Rechercher..." oninput="filterTasks()">
+                <select id="filter-status" onchange="filterTasks()">
+                    <option value="">Tous les statuts</option>
+                    <option value="à faire">À faire</option>
+                    <option value="en cours">En cours</option>
+                    <option value="terminé">Terminé</option>
+                </select>
+                <select id="filter-priority" onchange="filterTasks()">
+                    <option value="">Toutes les priorités</option>
+                    <option value="basse">Basse</option>
+                    <option value="moyenne">Moyenne</option>
+                    <option value="haute">Haute</option>
+                </select>
+                <select id="filter-assigned" onchange="filterTasks()">
+                    <option value="">Tous les membres</option>
+                </select>
+                <button class="btn btn-primary" onclick="showCreateTaskModal()">+ Nouvelle tâche</button>
+            </div>
+
+            <div class="tasks-table" id="tasks-list">
+               
+            </div>
+
+            <div class="pagination" id="tasks-pagination">
+                
+            </div>
+        </div>
+
+        
+        <div id="tab-members" class="tab-content">
+            <div class="members-section" id="owner-members-actions" style="display:none;">
+                <div class="invite-form">
+                    <input type="email" id="invite-email" placeholder="Email du membre à inviter">
+                    <button class="btn btn-primary" onclick="inviteMember()">Inviter</button>
+                </div>
+            </div>
+            <div class="members-list" id="members-list">
+                
+            </div>
+        </div>
+
+       
+        <div id="tab-activities" class="tab-content">
+            <div class="activities-feed" id="activities-list">
+                
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="modal" id="create-task-modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('create-task-modal')">&times;</span>
+            <h2>Nouvelle tâche</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-title">Titre </label>
+                    <input type="text" id="task-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priorité </label>
+                    <select id="task-priority" name="priority" required>
+                        <option value="basse">Basse</option>
+                        <option value="moyenne" selected>Moyenne</option>
+                        <option value="haute">Haute</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="task-deadline">Date limite</label>
+                    <input type="date" id="task-deadline" name="deadline">
+                </div>
+                <div class="form-group">
+                    <label for="task-assigned">Assigner à</label>
+                    <select id="task-assigned" name="assignedTo">
+                        <option value="">Non assigné</option>
+                    </select>
+                </div>
+                <div class="draft-notice" id="draft-notice" style="display:none;">
+                    <p>Un brouillon a été détecté. <a href="#" onclick="restoreDraft()">Restaurer</a> ou <a href="#" onclick="clearDraftAndReset()">ignorer</a></p>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Créer la tâche</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tasks.js"></script>
+    <script src="../js/members.js"></script>
+    <script src="../js/activities.js"></script>
+</body>
+</html>

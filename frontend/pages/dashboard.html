@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - TaskFlow</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">TaskFlow</div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="active">Tableau de bord</a>
+            <a href="projects.html">Mes projets</a>
+        </div>
+        <div class="nav-right">
+            <div class="notification-bell" onclick="toggleNotifications()">
+                🔔
+                <span class="badge" id="notification-badge"></span>
+            </div>
+            <span id="user-name"></span>
+            <button onclick="logout()" class="btn btn-small btn-danger">Déconnexion</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Tableau de bord</h1>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value" id="active-projects">0</div>
+                <div class="metric-label">Projets actifs</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="assigned-tasks">0</div>
+                <div class="metric-label">Tâches assignées</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value" id="completed-tasks">0</div>
+                <div class="metric-label">Tâches terminées</div>
+            </div>
+            <div class="metric-card metric-danger">
+                <div class="metric-value" id="overdue-tasks">0</div>
+                <div class="metric-label">Tâches en retard</div>
+            </div>
+        </div>
+
+        <h2>Tâches en cours</h2>
+        <div class="tasks-list" id="in-progress-tasks">
+            <!-- Rempli dynamiquement -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/notifications.js"></script>
+</body>
+</html>
