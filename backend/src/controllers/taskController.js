@@ -45,10 +45,9 @@ exports.getTasksByProject = async (req, res) => {
   }
 };
 exports.updateTask = async (req, res) => {
-  try {
     const { title, description, priority, status, deadline, assignedTo } = req.body;
-
-    const task = await Task.findByIdAndUpdate(
+  try {
+      const task = await Task.findByIdAndUpdate(
       req.params.id,
       { title, description, priority, status, deadline, assignedTo },
       { new: true }
@@ -61,9 +60,9 @@ exports.updateTask = async (req, res) => {
   }
 };
 exports.updateTaskStatus = async (req, res) => {
-  try {
     const { status } = req.body;
-
+  try {
+    
     const task = await Task.findByIdAndUpdate(
       req.params.id,
       { status },

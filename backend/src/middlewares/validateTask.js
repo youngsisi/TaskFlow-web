@@ -9,9 +9,9 @@ const validateTask = (req, res, next) => {
     ];
 
     const statuses = [
-        "a_faire",
-        "en_cours",
-        "termine"
+        "à faire",
+        "en cours",
+        "terminé"
     ];
 
     if (!title) {
